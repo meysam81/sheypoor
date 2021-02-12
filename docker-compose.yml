@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  app:
+    image: sheypoor
+    container_name: sheypoor-backend
+    hostname: sheypoor
+    restart: unless-stopped
+    build:
+      context: .
+    volumes:
+      - "./app:/service/app:ro"
+      - "./.env:/service/.env:ro"
+      - "./entrypoint.sh:/service/entrypoint.sh:ro"
+    ports:
+      - ${EXTERNAL_PORT}:${PORT}
+
+  db:
+    image: mongo:4.4.3-bionic
+    container_name: sheypoor-db
+    hostname: sheypoor-db
+    restart: unless-stopped
+    volumes:
+      - "sheypoor-db:/data/db"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+
+volumes:
+  sheypoor-db:
