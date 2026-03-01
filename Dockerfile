@@ -1,5 +1,5 @@
 # STAGE 0: base image
-FROM python:3.9-alpine AS base
+FROM python:3.14-alpine AS base
 
 LABEL author="Meysam Azad <MeysamAzad81@yahoo.com>"
 
